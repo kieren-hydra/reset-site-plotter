@@ -1,10 +1,11 @@
+import GoogleMapComponent from "./components/GoogleMapComponent"
 
 function App() {
 
   return (
     <>
-      <div className='bg-slate-400'>
-        Hello!
+      <div className=''>
+        <GoogleMapComponent/>
       </div>
     </>
   )
