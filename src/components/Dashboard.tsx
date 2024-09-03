@@ -1,12 +1,31 @@
+type DashboardProps = {
+  polygonCoordinates: { lat: number; lng: number }[];
+  clearPolygonCoordinates: () => void;
+  deleteLastCoordinate: () => void
+};
 
+const Dashboard = ({
+  polygonCoordinates,
+  clearPolygonCoordinates,
+  deleteLastCoordinate
+}: DashboardProps) => {
+  return (
+    <div className="w-80 h-full bg-slate-400">
+      {polygonCoordinates &&
+        polygonCoordinates.length > 0 &&
+        polygonCoordinates.map((point, index) => {
+          return (
+            <div>
+              <p>{point.lat}</p>
+              <p>{point.lng}</p>
+            </div>
+          );
+        })}
 
-const Dashboard = () => {
+      <button onClick={() => deleteLastCoordinate()}>back</button>
+      <button onClick={() => clearPolygonCoordinates()}>clear</button>
+    </div>
+  );
+};
 
-    return (
-        <div className="w-80 h-full bg-slate-400">
-
-        </div>
-    )
-}
-
-export default Dashboard
+export default Dashboard;

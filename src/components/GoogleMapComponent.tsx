@@ -1,11 +1,11 @@
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader} from "@react-google-maps/api";
 
 // Access the API key from environment variables
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API;
 
 const containerStyle = {
-  width: '100%',
-  height: '100%', // Adjust height as needed
+  width: "100%",
+  height: "100%", // Adjust height as needed
 };
 
 const center = {
@@ -13,7 +13,13 @@ const center = {
   lng: 150.644, // Default longitude
 };
 
-const GoogleMapComponent = () => {
+type GoogleMapComponentProps = {
+    children: React.ReactNode;
+    addPolygonCoordinates: (coord: { lat: number; lng: number }) => void;
+  };
+
+const GoogleMapComponent = ({ children, addPolygonCoordinates } : GoogleMapComponentProps) => {
+
   // Load the Google Maps JavaScript API
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: apiKey, // Make sure the API key is correctly set
@@ -24,20 +30,31 @@ const GoogleMapComponent = () => {
   }
 
   if (!isLoaded) {
-    return <div>Loading Maps...</div>; // Display a loading state while the map is loading
+    return <div>Loading Maps...</div>;
   }
 
+  const handleMapClick = (event: google.maps.MapMouseEvent) => {
+    // Check if event has latLng (might be null in some cases)
+    if (event.latLng) {
+      const lat = event.latLng.lat();
+      const lng = event.latLng.lng();
+      addPolygonCoordinates({lat, lng})
+    }
+  };
+
   return (
-    <div className='h-full, grow'> {/* Ensure full height and width */}
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
+    <div className="h-full, grow">
+      <GoogleMap 
+      mapContainerStyle={containerStyle} 
+      center={center} 
+      zoom={10}
+      onClick={handleMapClick}
       >
-        {/* You can add markers, polygons, etc., here */}
+        {children}
+
       </GoogleMap>
     </div>
   );
 };
 
-export default GoogleMapComponent
+export default GoogleMapComponent;
