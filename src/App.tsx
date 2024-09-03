@@ -1,10 +1,12 @@
 import GoogleMapComponent from "./components/GoogleMapComponent"
+import Dashboard from "./components/Dashboard"
 
 function App() {
 
   return (
     <>
-      <div className=''>
+      <div className='flex flex-row h-screen'>
+        <Dashboard/>
         <GoogleMapComponent/>
       </div>
     </>

@@ -5,7 +5,7 @@ const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API;
 
 const containerStyle = {
   width: '100%',
-  height: '100vh', // Adjust height as needed
+  height: '100%', // Adjust height as needed
 };
 
 const center = {
@@ -28,7 +28,7 @@ const GoogleMapComponent = () => {
   }
 
   return (
-    <div className='h-screen w-full'> {/* Ensure full height and width */}
+    <div className='h-full, grow'> {/* Ensure full height and width */}
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
