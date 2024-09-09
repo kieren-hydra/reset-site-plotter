@@ -20,7 +20,7 @@ const DrawPolygon = ({ polygonCoordinates } : DrawPolygonProps) => {
             strokeColor: '#00FF00',
             strokeOpacity: 1,
             strokeWeight: 2,
-            clickable: true,
+            clickable: false,
             draggable: false,
             editable: false,
             geodesic: false,
